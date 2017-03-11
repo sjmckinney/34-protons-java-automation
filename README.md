@@ -88,4 +88,8 @@ The Maven lifecycle has four phases for running integration tests:
 
 * verify for checking the results of the integration tests.
 
-The advantage of the _Failsafe_ plugin over the _Surefire_ plugin is that it ensure the teardown steps are run in the event of a test failure. Something that does not happen with the _Surefire_ plugin.
+The advantage of the _Failsafe_ plugin over the _Surefire_ plugin is that it ensures the teardown steps are run in the event of a test failure. As the _Surefire_ plugin is more of a unit test runner it quits with the first test case failure whereas the Failsafe_ ensures that the teardown steps are executes to leave the test environment in a known good state.
+
+**maven-surefire-report-plugin** _org.apache.maven.plugins_
+
+This plugin will process the output of the _Failsafe_ and _Surefire_ plugins to produce an html test report within the _target/site_ directory either as part of the _mvn site_ or indivdually with the _mvn surefire-report:report_ command (note the required images and css files are only available if the _mvn site_ command has previously been run).
