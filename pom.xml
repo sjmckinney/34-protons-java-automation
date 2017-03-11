@@ -12,8 +12,35 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
+    <selenium.version>3.3.0</selenium.version>
+    <phantomjs.version>1.4.1</phantomjs.version>
   </properties>
   <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+      <version>${selenium.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-remote-driver -->
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-remote-driver</artifactId>
+      <version>${selenium.version}</version>
+      <scope>test</scope>
+        <exclusions>
+            <exclusion>
+                <groupId>com.github.detro.ghostdriver</groupId>
+                <artifactId>phantomjsdriver</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.codeborne</groupId>
+        <artifactId>phantomjsdriver</artifactId>
+      <version>${phantomjs.version}</version>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
