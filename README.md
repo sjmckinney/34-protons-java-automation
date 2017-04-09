@@ -93,3 +93,40 @@ The advantage of the _Failsafe_ plugin over the _Surefire_ plugin is that it ens
 **maven-surefire-report-plugin** _org.apache.maven.plugins_
 
 This plugin will process the output of the _Failsafe_ and _Surefire_ plugins to produce an html test report within the _target/site_ directory either as part of the _mvn site_ or indivdually with the _mvn surefire-report:report_ command (note the required images and css files are only available if the _mvn site_ command has previously been run).
+
+### Driver Config
+
+```
+└── test
+      └─ java
+         │   └── com
+         │       └── _34protons
+         │           ├── config
+         │           │   ├── DriverType.java
+         │           │   └── DriverCreation.java
+         │           └── tests
+         │               │── AppTest.java
+         │               └── DriverTest.java
+```      
+
+There are many browsers in which might be used in testing. Each driver implementation can accept a DesiredCapabilities object that can be used to alter browser function.
+Additionally Firefox can accept a Profile object created via the Firefox Profile Manager or programtically at runtime.
+```
+<path to firefox exe/app> -P, -p or -ProfileManager
+```
+Chrome will accept chrome options in addition to Desired Capabilites
+
+https://sites.google.com/a/chromium.org/chromedriver/capabilities
+
+The interface _**DriverCreation**_ defines two methods;
+```
+    DesiredCapabilities getDesiredCapabilities();
+    
+    WebDriver getwebDriverObject(DesiredCapabilities desiredCapabilities);
+```
+The first returns a _DesiredCapabilites_ object; the second consumes that _DesiredCapabilites_ object in the creation of a _WebDriver_ object.
+
+The enum DriverType defines each of the Browser implementations in terms of specific _DesiredCapabities_. All Enums implement the methods defined in the **_BrowserCreation_** interface.
+
+Creating an instance of a particular browser is a case of specifying the required **_BrowserType_** Enum and calling it _getwebDriverObject_ method.
+    

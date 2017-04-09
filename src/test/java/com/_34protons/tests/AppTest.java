@@ -1,4 +1,4 @@
-package com._34protons;
+package com._34protons.tests;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
