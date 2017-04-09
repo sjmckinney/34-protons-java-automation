@@ -42,7 +42,7 @@ The plugin places the downloaded files in the default location _test/java/resour
  
 ```
 └── test
-      ├── java
+      └─ java
          │   └── com
          │       └── _34protons
          │           └── AppTest.java
