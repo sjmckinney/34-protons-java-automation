@@ -99,15 +99,15 @@ This plugin will process the output of the _Failsafe_ and _Surefire_ plugins to 
 ```
 └── test
       └─ java
-         │   └── com
-         │       └── _34protons
-         │           ├── config
-         │           │   ├── DriverType.java
-         │           │   └── DriverCreation.java
-         │           └── tests
-         │               │── AppTest.java
-         │               └── DriverTest.java
-```      
+         └── com
+             └── _34protons
+                 ├── config
+                 │   ├── DriverType.java
+                 │   └── DriverCreation.java
+                 └── tests
+                     │── AppTest.java
+                     └── DriverTest.java
+```     
 
 There are many browsers in which might be used in testing. Each driver implementation can accept a DesiredCapabilities object that can be used to alter browser function.
 Additionally Firefox can accept a Profile object created via the Firefox Profile Manager or programtically at runtime.
@@ -129,4 +129,52 @@ The first returns a _DesiredCapabilites_ object; the second consumes that _Desir
 The enum DriverType defines each of the Browser implementations in terms of specific _DesiredCapabities_. All Enums implement the methods defined in the **_BrowserCreation_** interface.
 
 Creating an instance of a particular browser is a case of specifying the required **_BrowserType_** Enum and calling it _getwebDriverObject_ method.
-    
+
+### Adding Cucumber BDD tests
+
+Behavior Driven Development (BDD) is a software development methodology builds on Test Driven Development (TDD) as away of describing the desired functionality from the end users point of view. These "behaviours" are captured in a Given, When, Then in a Gherkin format be automated using a Cucumber framework.
+
+The Gherkin format allows any stakeholder to review and add scenarios to the feature files that describe the expected behaviour of the application. Once automated and passing the scenarios provide confidence that the application's functionality will satisfy the end users' needs.
+
+#### Project structure
+
+In a typically java-cucumber project the feature files(*LoginTests.feature*) live under the **test/resources** directory whilst the Junit runner and Step Definition files (*LoginSteps.java* & *RunLoginTests.java*) live under the **test/java/** directory.
+
+The Junit runner file is an empty class decorated with a number of annotations that provide extra information like the format of the output file.
+
+```
+└── test
+    ├─ java
+    │  └── com
+    │      └── _34protons
+    │          ├── config
+    │          │   ├── DriverType.java
+    │          │   └── DriverCreation.java
+    │          └── tests
+    │              ├── login
+    │              │   └── LoginSteps.java
+    │              │   └── RunLoginTests.java
+    │              ├── AppTest.java
+    │              └── DriverTest.java
+    └─ resources
+       └── features
+           └── LoginTests.feature
+```
+
+In order to find the feature file that corresponds to the Junit runner file the directory structure under the **resources** directory should mimic that found under the **test/java** directory. Alternately the path to the feature file (relative to *test* directory) can be provided in the *@CucumberOptions* anotation as the 'features' property.
+```
+package com._34protons.tests.login;
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+import org.junit.runner.RunWith;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        plugin = {"pretty", "html:target/cucumber"},
+        features = {"classpath:features/LoginTests.feature"})
+
+public class RunLoginTests {
+}
+```
+ 
