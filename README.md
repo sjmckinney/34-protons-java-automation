@@ -177,4 +177,27 @@ import org.junit.runner.RunWith;
 public class RunLoginTests {
 }
 ```
+### Running Tests from the command line
+
+This is a *maven* project. Amongst other things this allows different *phases* to be run from the command line. In this case, because the project uses the **failsafe** plugin the **integration-test** phase.
+
+The following will run run the *clean* lifecycle followed by the *test* phase.
+```$xslt
+mvn clean test
+```
+Adding the *-D* (or *--define* options) allows *key value* pairs to be passed as in system properties to maven, overriding any existing properties set in a *pom* or *setting* 
+
+```$xslt
+mvn -DbaseUrl=http://www.34protons.co.uk clean test
+```
+
+Individual tests can be run by passing in the *test=test-name* key value pair as another *define* option.
+```$xslt
+mvn -DbaseUrl=http://www.34protons.co.uk -Dtest=DriverTest clean test
+```
+
+The *define* option can also be used to pass *cucumber options*.
  
+```$xslt
+mvn -Dcucumber.options="--tags @login --tags ~@ignore --plugin html:target/cucumber-html-report-myReport" clean test
+```
