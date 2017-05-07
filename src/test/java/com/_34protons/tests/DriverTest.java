@@ -45,20 +45,5 @@ public class DriverTest {
         webDriver.quit();
 
     }
-
-/*    private static DriverType getDefaultDriverType() {
-
-        DriverType driverType = defaultDriverType;
-
-        try{
-            String browser = System.getProperty("browser").toUpperCase();
-            driverType = valueOf(browser);
-        } catch (IllegalArgumentException ignored) {
-            logger.error("Unknown driver specified. Reverting to default: ".concat(defaultDriverType.toString()));
-        } catch ( NullPointerException ignored) {
-            logger.error("No driver type specified. Reverting to default: ".concat(defaultDriverType.toString()));
-        }
-        logger.info("Value of DriverType is: ".concat(driverType.toString()));
-        return driverType;
-    }*/
+    
 }
