@@ -201,3 +201,27 @@ The *define* option can also be used to pass *cucumber options*.
 ```$xslt
 mvn -Dcucumber.options="--tags @login --tags ~@ignore --plugin html:target/cucumber-html-report-myReport" clean test
 ```
+
+### Shared Driver Instance
+
+
+### Dependency Injection
+
+Cucumber supports several Dependency Injection (DI) frameworks; PicoContainer, Spring, Guice, OpenEJB, Weld and Needle.
+
+PicoContainer is the simplest implementation and the obvious choice if the project is not already using a DI framework.
+
+The use of DI framework allows and instance of WebDriver (generated in the @Before step) to be injected into the Step Definition code in each classes constructor for use in browser automation code.
+
+```java
+public class LoginSteps {
+
+    private final PageObject pageObject;
+
+    public LoginSteps(PageObject pageObj) {
+        this.pageObject = pageObj;
+    }
+```
+Alternately, where a page object approach is taken page object instances can be injected.
+
+Two other files required; ```cucumber.properties``` and ```PicoDependencyInjector.class``` seemingly in order to inject webdriver into page object classes.
