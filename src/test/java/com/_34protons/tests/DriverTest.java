@@ -1,16 +1,13 @@
 package com._34protons.tests;
 
-import com._34protons.config.DriverType;
+import com._34protons.config.DriverFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
-import static com._34protons.config.DriverType.CHROME;
-import static com._34protons.config.DriverType.valueOf;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -19,17 +16,15 @@ import static org.junit.Assert.assertEquals;
 
 public class DriverTest {
 
-    private static DriverType defaultDriverType = CHROME;
     private final static Logger logger = LogManager.getLogger(DriverTest.class);
+    private static DriverFactory driverFactory = new DriverFactory();
     private static WebDriver webDriver = null;
     private String expectedPageTitle = "Adventures in automation | Thoughts about automated testing";
 
     @BeforeClass
     public static void beforeClass() {
 
-        DriverType driverType = getDefaultDriverType();
-        DesiredCapabilities desiredCapabilities = driverType.getDesiredCapabilities();
-        webDriver = driverType.getwebDriverObject(desiredCapabilities);
+        webDriver = driverFactory.getDefaultWebDriver();
         webDriver.get(System.getProperty("baseUrl", "http://www.34protons.co.uk"));
 
     }
@@ -51,7 +46,7 @@ public class DriverTest {
 
     }
 
-    private static DriverType getDefaultDriverType() {
+/*    private static DriverType getDefaultDriverType() {
 
         DriverType driverType = defaultDriverType;
 
@@ -65,5 +60,5 @@ public class DriverTest {
         }
         logger.info("Value of DriverType is: ".concat(driverType.toString()));
         return driverType;
-    }
+    }*/
 }

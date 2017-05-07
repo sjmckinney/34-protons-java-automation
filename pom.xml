@@ -12,7 +12,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
-    <selenium.version>3.3.0</selenium.version>
+    <selenium.version>3.4.0</selenium.version>
     <phantomjs.version>1.4.1</phantomjs.version>
     <overwrite.binaries>false</overwrite.binaries>
     <browser>firefox</browser>
@@ -159,7 +159,8 @@
                     <webdriver.edge.driver>${webdriver.edge.driver}</webdriver.edge.driver>
                 </systemPropertyVariables>
                 <includes>
-                    <include>**/DriverTest.java</include>
+                    <!--include>**/DriverTest.java</include-->
+                    <include>**/Run*.java</include>
                 </includes>
           </configuration>
         </plugin>
