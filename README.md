@@ -204,6 +204,10 @@ mvn -Dcucumber.options="--tags @login --tags ~@ignore --plugin html:target/cucum
 
 ### Shared Driver Instance
 
+Original implementation taken from the example *java-webbit-websockets-selenium* project in **cucumber-jvm** repo ( [cucumber-jvm:SharedDriver.java](https://github.com/cucumber/cucumber-jvm/blob/master/examples/java-webbit-websockets-selenium/src/test/java/cucumber/examples/java/websockets/SharedDriver.java) ).
+
+This makes more efficient usage of an instance of the WebDriver instance by only closing it once all the scenarios have finished. A reference to the shared instance is passed to each to the BasePage class at the start of each scenario
+
 
 ### Dependency Injection
 

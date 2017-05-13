@@ -2,10 +2,9 @@ package com._34protons.pages;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.By;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
 
@@ -47,6 +46,20 @@ public class BasePage {
             exists = true;
         } catch (NoSuchElementException ex) {
             //Do nothing
+            logger.debug(String.format("Element %s does not exist.", locator.toString()));
+        }
+        return exists;
+    }
+
+    public Boolean waitUntilElementExists(By locator, Integer waitTime) {
+        Boolean exists = false;
+        WebDriverWait wait = new WebDriverWait(driver, waitTime);
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            exists = true;
+        } catch (NoSuchElementException | TimeoutException ex) {
+            //Do nothing
+            logger.debug(String.format("Element %s does not exist or wait timed out after %d seconds.", locator.toString(), waitTime));
         }
         return exists;
     }
