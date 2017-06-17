@@ -1,4 +1,4 @@
-package com._34protons.tests.login;
+package com._34protons.tests.steps;
 
 import com._34protons.pages.LoginPage;
 import com._34protons.pages.MainPage;

@@ -1,4 +1,4 @@
-Feature: Having authenticated as a valid user I should able to access the website
+Feature: Access to the website is dependent on correct authentication
 
   @login @valid
   Scenario: As a valid user I should be able to access the website

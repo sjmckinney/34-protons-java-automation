@@ -19,3 +19,4 @@ target
 
 /src/test/resources/selenium_standalone_binaries/osx/
 /src/test/resources/selenium_standalone_zips/
+/output

@@ -19,8 +19,10 @@
         <log4j.version>2.7</log4j.version>
         <junit.version>4.12</junit.version>
         <cucumber.version>1.2.5</cucumber.version>
+        <mvn-cucumber-reporting.version>2.8.0</mvn-cucumber-reporting.version>
         <browser>firefox</browser>
-        <threads>1</threads>
+        <parallel.config>classes</parallel.config>
+        <threads>2</threads>
         <remote>false</remote>
         <baseUrl>http://www.34protons.co.uk/demo_2_0/</baseUrl>
         <seleniumGridURL/>
@@ -148,7 +150,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <parallel>methods</parallel>
+                    <parallel>${parallel.config}</parallel>
                     <threadCount>${threads}</threadCount>
                     <systemPropertyVariables>
                         <browser>${browser}</browser>
@@ -185,6 +187,26 @@
                         <goals>
                             <goal>test-jar</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>${mvn-cucumber-reporting.version}</version>
+                <executions>
+                    <execution>
+                        <id>execution</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>cucumber-jvm-example</projectName>
+                            <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
+                            <cucumberOutput>${project.build.directory}/cucumber.json</cucumberOutput>
+                            <parallelTesting>false</parallelTesting>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
